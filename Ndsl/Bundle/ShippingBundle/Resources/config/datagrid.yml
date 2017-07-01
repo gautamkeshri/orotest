@@ -1,0 +1,94 @@
+datagrid:
+    ndsl-shipping-grid:
+        extended_entity_name: OroCRM\Bundle\MagentoBundle\Entity\Order
+        acl_resource: orocrm_magento_order_view 
+        source:
+            type: orm
+            query:
+                select:
+                    - ndsl_shipping.id
+                    - ndsl_shipping.orderNo
+                    - ndsl_shipping.name
+                    - ndsl_shipping.phone
+                    - ndsl_shipping.email
+                    - ndsl_shipping.city
+                    - ndsl_shipping.state
+                    - ndsl_shipping.pincode
+                    - ndsl_shipping.amount
+                from:
+                    - { table: NdslShippingBundle:Delhivery, alias: ndsl_shipping }
+                join:
+                    left:
+                        - { join: ndsl_shipping.orderNo, alias: Order }    
+        columns:
+            id:
+                label: ndsl_shipping.simple_crud.id.label
+            orderNo:
+                label: ndsl_shipping.simple_crud.orderNo.label
+            name:
+                label: ndsl_shipping.simple_crud.name.label
+            phone:
+                label: ndsl_shipping.simple_crud.phone.label
+            email:
+                label: ndsl_shipping.simple_crud.email.label				
+            city:
+                label: ndsl_shipping.simple_crud.city.label
+            state:
+                label: ndsl_shipping.simple_crud.state.label
+            pincode:
+                label: ndsl_shipping.simple_crud.pincode.label
+            amount:
+                label: ndsl_shipping.simple_crud.amount.label
+        properties:
+            id: ~
+            update_link:
+                type:       url
+                route:      ndsl_shipping_update
+                params:     [ id ]
+            delete_link:
+                type:       url
+                route:      ndsl_shipping_delete
+                params:     [ id ]
+            view_link:
+                type:       url
+                route:      ndsl_index_view
+                params:     [ id ]    
+        sorters:
+            columns:
+                id:
+                    data_name: ndsl_shipping.id
+                orderNo:
+                    data_name: ndsl_shipping.orderNo
+            default:
+                model: DESC        
+        filters:
+            columns:
+                orderNo:
+                    type: string
+                    data_name: ndsl_shipping.orderNo
+        actions:
+            update:
+                type:          navigate
+                label:         oro.grid.action.update
+                icon:          edit
+                link:          update_link
+            delete:
+                type:          navigate
+                label:         oro.grid.action.delete
+                icon:          trash
+                link:          delete_link
+            generate:
+                type:          navigate
+                label:         "shipping"
+                icon:          anchor
+                link:          generat_link				
+            view:
+                type:          navigate
+                label:         View
+                link:          view_link
+                icon:          eye-open
+                rowAction:     true
+        options:
+                entityHint: Delhivery
+                export: true
+                entity_pagination: true					

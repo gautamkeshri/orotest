@@ -1,0 +1,14 @@
+{% extends 'OroUIBundle:actions:index.html.twig' %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+{% set pageTitle = 'ndsl_shipping.simple_crud.entity_plural_label'|trans %}
+{% set gridName = 'ndsl-shipping-grid' %}
+
+{% block navButtons %}
+        <div class="btn-group">
+            {{ UI.addButton({
+                'path' : path('ndsl_shipping_create'),
+                'title' : 'ndsl_shipping.simple_crud.new'|trans,
+                'label' : 'ndsl_shipping.simple_crud.new'|trans
+            }) }}
+        </div>
+{% endblock %}

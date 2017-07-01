@@ -1,0 +1,22 @@
+oro_menu_config:
+    items:
+        ndsl_tab:
+            label: Ndsl
+            uri:   '#'
+            extras:
+                position: 300
+        ndsl_tab_link:
+            label: "Order details"
+            route: ndsl_index
+            extras:
+                routes: ['/^ndsl_index/']
+                description: Ndsl Delhivery
+    tree:
+        application_menu:
+            children:
+                ndsl_tab:
+                    children:
+                        ndsl_tab_link: ~
+                        ndsl_tab_link2: ~
+oro_titles:
+    ndsl_index: "Order Info"

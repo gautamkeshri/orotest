@@ -1,0 +1,70 @@
+{# src/InventoryBundle/Resources/views/Vehicle/view.html.twig #}
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% block navButtons %}
+    
+        {{ UI.editButton({
+            'path' : path('ndsl_shipping_update', { id: entity.id }),
+            'entity_label': 'Order'|trans
+        }) }}
+    
+
+    
+        {{ UI.deleteButton({
+            'dataUrl': path('ndsl_shipping_delete', {'id': entity.id}),
+            'dataRedirect': path('ndsl_index'),
+            'aCss': 'no-hash remove-button',
+            'id': 'btn-remove-vehicle',
+            'dataId': entity.id,
+            'entity_label': 'Orders'|trans,
+        }) }}
+    
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+        'entity':      entity,
+        'indexPath':   path('ndsl_index'),
+        'indexLabel': 'Order No'|trans,
+        'entityTitle': entity.orderNo
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {% set data %}
+        <div class="widget-content">
+            <div class="row-fluid form-horizontal">
+                <div class="responsive-block">
+                    {{ UI.renderProperty('orderNo'|trans, entity.orderNo) }}
+                    {{ UI.renderProperty('name'|trans, entity.name) }}
+                    {{ UI.renderProperty('address'|trans, entity.address) }}
+                    {{ UI.renderProperty('phone'|trans, entity.phone) }}
+                    {{ UI.renderProperty('email'|trans, entity.email) }}
+                    {{ UI.renderProperty('city'|trans, entity.city) }}
+                    {{ UI.renderProperty('statel'|trans, entity.state) }}
+                    {{ UI.renderProperty('pincode'|trans, entity.pincode) }}
+                    {{ UI.renderProperty('description'|trans, entity.description) }}
+                    {{ UI.renderProperty('url'|trans, entity.url) }}
+                    {{ UI.renderProperty('weight'|trans, entity.weight) }}
+                    {{ UI.renderProperty('invoiceNo'|trans, entity.invoiceNo) }}
+                    {{ UI.renderProperty('qry'|trans, entity.qty) }}
+                </div>
+            </div>
+        </div>
+    {% endset %}
+    {% set dataBlocks = [
+        {
+            'title': 'Order'|trans,
+            'class': 'active',
+            'subblocks': [
+                { 'data' : [data] }
+            ]
+        }
+    ] %}
+
+    {% set id = 'vehicleView' %}
+    {% set data = { 'dataBlocks': dataBlocks } %}
+    {{ parent() }}
+{% endblock content_data %}

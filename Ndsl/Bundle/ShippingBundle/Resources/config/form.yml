@@ -1,0 +1,70 @@
+parameters:
+    ndsl_shipping.form.type.class:         Ndsl\Bundle\ShippingBundle\Form\Type\DelhiveryType
+    ndsl_awb.form.type.class:              Ndsl\Bundle\ShippingBundle\Form\Type\slistType
+    ndsl_notes.form.type.class:            Ndsl\Bundle\ShippingBundle\Form\Type\notesType
+    ndsl_genus.form.type.class:            Ndsl\Bundle\ShippingBundle\Form\Type\genusType
+    
+    ndsl_shipping.form.handler.class:      Ndsl\Bundle\ShippingBundle\Form\Handler\DelhiveryHandler
+    ndsl_awb.form.handler.class:           Ndsl\Bundle\ShippingBundle\Form\Handler\slistHandler
+    ndsl_notes.form.handler.class:         Ndsl\Bundle\ShippingBundle\Form\Handler\notesHandler
+    ndsl_genus.form.handler.class:         Ndsl\Bundle\ShippingBundle\Form\Handler\genusHandler
+
+services:
+    ndsl_shipping.form.type:
+        class: %ndsl_shipping.form.type.class%
+        tags:
+            - { name: form.type, alias: ndsl_shipping_crud_form }
+    ndsl_awb.form.type:
+        class: %ndsl_awb.form.type.class%
+        tags:
+            - { name: form.type, alias: ndsl_awb_crud_form }
+    ndsl_notes.form.type:
+        class: %ndsl_notes.form.type.class%
+        tags:
+            - { name: form.type, alias: ndsl_notes_crud_form }        
+    ndsl_genus.form.type:
+        class: %ndsl_genus.form.type.class%
+        tags:
+            - { name: form.type, alias: ndsl_genus_crud_form }                
+            
+    ndsl_shipping.form.handler:
+        class: %ndsl_shipping.form.handler.class%
+        scope: request
+        arguments:
+            - "ndsl_shipping_crud_form"
+            - "ndsl_shipping_crud_form"
+            - @request
+            - @doctrine.orm.entity_manager
+            - @oro_entity.routing_helper
+            - @form.factory
+    
+    ndsl_awb.form.handler:
+        class: %ndsl_awb.form.handler.class%
+        scope: request
+        arguments:
+            - "ndsl_awb_crud_form"
+            - "ndsl_awb_crud_form"
+            - @request
+            - @doctrine.orm.entity_manager
+            - @oro_entity.routing_helper
+            - @form.factory			
+    ndsl_notes.form.handler:
+        class: %ndsl_notes.form.handler.class%
+        scope: request
+        arguments:
+            - "ndsl_notes_crud_form"
+            - "ndsl_notes_crud_form"
+            - @request
+            - @doctrine.orm.entity_manager
+            - @oro_entity.routing_helper
+            - @form.factory			        
+    ndsl_genus.form.handler:
+        class: %ndsl_genus.form.handler.class%
+        scope: request
+        arguments:
+            - "ndsl_genus_crud_form"
+            - "ndsl_genus_crud_form"
+            - @request
+            - @doctrine.orm.entity_manager
+            - @oro_entity.routing_helper
+            - @form.factory        

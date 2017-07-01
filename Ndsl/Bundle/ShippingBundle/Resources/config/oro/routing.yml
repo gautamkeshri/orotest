@@ -1,0 +1,4 @@
+dusan_simple_homepage:
+    resource: "@NdslShippingBundle/Controller"
+    type: annotation
+    prefix: /ndsl

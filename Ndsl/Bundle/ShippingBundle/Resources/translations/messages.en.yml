@@ -1,0 +1,35 @@
+ndsl_shipping:
+    simple_crud:
+        id.label: Id
+        orderNo.label: "Order No"
+        name.label: "Name"
+        phone.label: "phone"
+        email.label: "Email"
+        city.label: "city"
+        state.label: "state"
+        pincode.label: "pincode"
+        amount.label: "amount"
+        order_date.label: "order Date"
+        entity_plural_label: "Ndsl ship"
+        new:    "New"
+        edit:    "Edit"
+        entity_label:    "Ndsl Shipping"
+        controller:
+            saved.message:    "Shipping record successfully saved"
+            notfound.message:    "Shipping record not found"
+            deleted.message:    "Shipping record successfully deleted"
+    awb_info:
+        id.label: Id
+        refnumber.label: "Ref_num"
+        awbno.label: "AWB_No"
+        destLoc.label: "Dest"
+        warehouseCode.label: "Ware"
+        status.label: "Status"
+        entity_plural_label: "AWB List"
+        new:    "New"
+        edit:    "Edit"
+        entity_label: "AWB List"
+        controller:
+            saved.message:    "AWB record successfully saved"
+            notfound.message:    "AWB record not found"
+            deleted.message:    "AWB record successfully deleted"

@@ -1,0 +1,73 @@
+{% extends 'OroUIBundle:actions:update.html.twig' %}
+{% oro_title_set({params : {"%subject%": form.vars.value.subject|default('N/A') } }) %}
+{% block content_data %}
+    {% set id = 'simplecrud-log' %}
+    {% set title = 'oro.ui.edit_entity'|trans({'%entityName%': 'ndsl_shipping.simple_crud.entity_label'|trans}) %}
+
+    {% set formFields = [] %}
+
+    {% set formFields = formFields|merge([
+        form_row(form.orderNo),
+        form_row(form.name),
+        form_row(form.address),
+		form_row(form.phone),
+		form_row(form.email),
+		form_row(form.city),
+		form_row(form.state),
+		form_row(form.pincode),
+		form_row(form.description),
+		form_row(form.url),
+		form_row(form.weight),
+		form_row(form.amount),
+		form_row(form.invoiceNo),
+		form_row(form.qty)
+    ]) %}
+
+    {% set dataBlocks = [{
+        'title': title,
+        'class': 'active',
+        'subblocks': [
+            {
+                'title': title,
+                'data': formFields
+            }
+        ]
+    }] %}
+
+    {% set data = {
+        'formErrors': form_errors(form)? form_errors(form) : null,
+        'dataBlocks': dataBlocks
+    } %}
+    {{ parent() }}
+{% endblock content_data %}
+
+{% block navButtons %}
+    {{ UI.cancelButton(path('ndsl_index')) }}
+    {% set html = UI.saveAndCloseButton() %}
+    {% if form.vars.value.id or resource_granted('ndsl_shipping_update') %}
+        {% set html = html ~ UI.saveAndStayButton() %}
+    {% endif %}
+    {{ UI.dropdownSaveButton({'html': html}) }}
+{% endblock %}
+
+{% block pageHeader %}
+    {% if form.vars.value.id %}
+        {% set breadcrumbs = {
+            'entity':      form.vars.value,
+            'indexPath':   path('ndsl_index'),
+            'indexLabel': 'ndsl_shipping.simple_crud.entity_plural_label'|trans,
+            'entityTitle': form.vars.value.subject|default('N/A')
+        }
+        %}
+    {% else %}
+        {% set breadcrumbs = {
+            'entity':      form.vars.value,
+            'indexPath':   path('ndsl_index'),
+            'indexLabel': 'ndsl_shipping.simple_crud.entity_plural_label'|trans,
+            'entityTitle': 'ndsl_shipping.simple_crud.edit'|trans
+        }
+        %}
+    {% endif %}
+    {{ parent() }}
+{% endblock pageHeader %}
+

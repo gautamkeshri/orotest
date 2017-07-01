@@ -1,0 +1,2 @@
+bundles:
+    - { name: Ndsl\Bundle\ShippingBundle\NdslShippingBundle, priority: 100 }
